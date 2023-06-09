@@ -56,8 +56,17 @@ async function run() {
     // Classes related api
     app.get("/classes", async (req, res) => {
       const result = await classesCollection
-        .find()
-        .sort({ totalStudents: -1 })
+
+        .aggregate([
+          {
+            $addFields: {
+              totalStudents: { $toInt: "$totalStudents" },
+            },
+          },
+          {
+            $sort: { totalStudents: -1 },
+          },
+        ])
         .toArray();
       res.send(result);
     });
