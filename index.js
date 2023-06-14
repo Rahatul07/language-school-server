@@ -334,9 +334,6 @@ async function run() {
         class_update_doc
       );
 
-      // update enrolled
-      // const update_enrolled_result =
-
       // saved to enrolled class
       const save_enrolled_result = await enrolledCollection.insertOne(
         paymentInfo.enrolled_info
