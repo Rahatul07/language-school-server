@@ -284,7 +284,16 @@ async function run() {
       const result = await enrolledCollection.find(filter).toArray();
       res.send(result);
     });
-
+    // get payment history
+    app.get("/payment_history/:email", verifyJWT, async (req, res) => {
+      if (req.decoded.email !== req.params.email) {
+        return res.status(403).send({ error: true, message: "Forbidden" });
+      }
+      const email = req.params.email;
+      const filter = { email: email };
+      const result = await paymentHistoryCollection.find(filter).toArray();
+      res.send(result);
+    });
     // update class status
     app.patch("/classes/:id", verifyJWT, verifyAdmin, async (req, res) => {
       const id = req.params.id;
