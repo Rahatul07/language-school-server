@@ -58,8 +58,8 @@ async function run() {
         return;
       }
     });
-    const serviceCollection = client.db("languageDB").collection("services");
-    const usersCollection = client.db("languageDB").collection("users");
+    // const serviceCollection = client.db("languageDB").collection("services");
+    // const studentsCollection = client.db("languageDB").collection("users");
     const reviewsCollection = client.db("languageDB").collection("reviews");
     const classesCollection = client.db("languageDB").collection("classes");
     const studentCollection = client.db("languageDB").collection("students");
@@ -485,15 +485,10 @@ async function run() {
     //   res.send(result);
     // });
 
-    // app.post("/users", async (req, res) => {
+    // app.post("/students", async (req, res) => {
     //   const user = req.body;
     //   console.log(user);
-    //   const query = { email: user.email };
-    //   const existingUser = await usersCollection.findOne(query);
-    //   if (existingUser) {
-    //     return res.send({ message: "user already exists" });
-    //   }
-    //   const result = await usersCollection.insertOne(user);
+    //   const result = await studentCollection.insertOne(user);
     //   res.send(result);
     // });
 
@@ -504,10 +499,10 @@ async function run() {
     //   res.send(result);
     // });
     // // review related apis
-    // app.get("/reviews", async (req, res) => {
-    //   const result = await reviewsCollection.find().toArray();
-    //   res.send(result);
-    // });
+    app.get("/reviews", async (req, res) => {
+      const result = await reviewsCollection.find().toArray();
+      res.send(result);
+    });
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log(
